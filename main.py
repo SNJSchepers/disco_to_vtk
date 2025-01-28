@@ -33,7 +33,7 @@ def main():
     file_name = '00010000'
 
     # Write booleans
-    write_flow        = False
+    write_flow        = True
     write_species     = False
     write_source      = False
     write_enthalpy    = False
@@ -104,9 +104,9 @@ def main():
         grid.point_data["hrr"]  = hrr.flatten(order="F")      # Heat release rate
 
         # Write the grid to a VTK file
-        grid.save("output/flow_data.vtk")
+        grid.save('output/flow_data_'+file_name+'.vtk')
 
-        print("Flow data written to flow_data.vtk")
+        print('Flow data written to flow_data_'+file_name+'.vtk')
 
         # Remove the grid from memory
         del grid
@@ -125,9 +125,9 @@ def main():
             grid.point_data[Sp[i]["Name"]] = Ysp[:,:,:,i].flatten(order="F")
 
         # Write the grid to a VTK file
-        grid.save("output/species_data.vtk")
+        grid.save('output/species_data_'+file_name+'.vtk')
 
-        print("Species data written to species_data.vtk")
+        print('Species data written to species_data_'+file_name+'.vtk')
 
         # Remove the grid from memory
         del grid
@@ -146,9 +146,9 @@ def main():
             grid.point_data['source_'+Sp[i]["Name"]] = Ssp[:,:,:,i].flatten(order="F")
 
         # Write the grid to a VTK file
-        grid.save("output/source_data.vtk")
+        grid.save('output/source_data_'+file_name+'.vtk')
 
-        print("Source data written to source_data.vtk")
+        print('Source data written to source_data_'+file_name+'.vtk')
 
         # Remove the grid from memory
         del grid
@@ -167,9 +167,9 @@ def main():
             grid.point_data['h_'+Sp[i]["Name"]] = hsp[:,:,:,i].flatten(order="F")
 
         # Write the grid to a VTK file
-        grid.save("output/enthalpy_data.vtk")
+        grid.save('output/enthalpy_data_'+file_name+'.vtk')
 
-        print("Enthalpy data written to enthalpy_data.vtk")
+        print('Enthalpy data written to enthalpy_data_'+file_name+'.vtk')
 
         # Remove the grid from memory
         del grid
