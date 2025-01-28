@@ -4,33 +4,13 @@ import gc
 import sys
 
 from chemistry.ReadTrotDatmod  import ReadTrotDatmod
-
-# Function to read 4D binary files
-def read4Dfile(fileName,nx,ny,nz,nv):
-    f = np.memmap(fileName, dtype=float, mode='r')
-    f = np.reshape(f, (nx,ny,nz,nv), order='F')
-    return f
-
-# Function to read 3D binary files
-def read3Dfile(fileName,nx,ny,nz):
-    f = np.memmap(fileName, dtype=float, mode='r')
-    f = np.reshape(f, (nx,ny,nz), order='F')
-    return f
-
-def listStruc(Struc=None,fieldname=None):
-    return [Struc[x][fieldname] for x in range(len(Struc))]
-
-def SpInd(Name,Sp):
-    return listStruc(Sp,"Name").index(Name)
-
-def ElInd(Name,El):
-    return listStruc(El,"Name").index(Name)
+from utils import *
 
 def main():
 
     # Location and file name
     directory = '/mnt/d/DNS+DC/ref/'
-    file_name = '00010000'
+    file_name = '00016000'
 
     # Write booleans
     write_flow        = True
