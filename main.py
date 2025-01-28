@@ -1,3 +1,21 @@
+"""
+Main Script for DNS Data Processing
+===================================
+
+Author: Stijn Schepers
+Contact: stijn.schepers.snj@gmail.com
+Date: January 28, 2025
+
+Description:
+------------
+This script reads DISCO binary output files, extracts flow, species, and other fields, 
+and exports them in VTK format for visualization in Paraview.
+
+Usage and Installation:
+-----------------------
+See README.md for installation and usage instructions.
+"""
+
 import numpy as np
 import pyvista as pv
 import gc
