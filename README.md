@@ -24,7 +24,7 @@ A python program that reads DISCO output files and writes them in VTK format to 
    
 ## Usage
 
-1. Change the `input_directory` to the location where your bindary DISCO files are located. Change `file_name` to which file / timestep you want to open. Change 'output_directory' to the location you want to store the VTK files.
+1. Change `input_directory` to the location where your bindary DISCO files are located. Change `file_name` to which file / timestep you want to open. Change `output_directory` to the location you want to store the VTK files.
 2. Set the write booleans, `write_flow`,`write_species`,`write_source` and `write_enthalpy`, to select which variables you want to write.
 3. Check if the grid parameters are correct.
 
