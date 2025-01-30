@@ -26,14 +26,15 @@ from utils import *
 
 def main():
 
-    # Location and file name
-    directory = '/mnt/d/DNS+DC/ref/'
-    file_name = '00016000'
+    # Locations and file name
+    input_directory  = '/mnt/d/DNS+DC/ref/'
+    file_name        = '00012000'
+    output_directory = '/mnt/d/DNS+DC/ref/VTK/'
 
     # Write booleans
-    write_flow        = True
+    write_flow        = False
     write_species     = False
-    write_source      = False
+    write_source      = True
     write_enthalpy    = False
 
     # Grid parameters
@@ -52,13 +53,13 @@ def main():
     _, Sp, _, _, Nsp, _ = ReadTrotDatmod("chemistry/Burke-H2-2012-N2.trot")
 
     # Read the DNS data
-    data_v   = read4Dfile(directory +'v'   + file_name + '.bin' ,nx,ny,nz,15)
-    data_st  = read4Dfile(directory +'st'  + file_name + '.bin' ,nx,ny,nz,9 )
-    data_hh  = read4Dfile(directory +'hh'  + file_name + '.bin' ,nx,ny,nz,9 )
-    data_mu  = read3Dfile(directory +'mu'  + file_name + '.bin' ,nx,ny,nz)
-    data_eps = read3Dfile(directory +'eps' + file_name + '.bin' ,nx,ny,nz)
-    data_hrr = read3Dfile(directory +'hrr' + file_name + '.bin' ,nx,ny,nz)
-    data_k   = read3Dfile(directory +'k'   + file_name + '.bin' ,nx,ny,nz)
+    data_v   = read4Dfile(input_directory +'v'   + file_name + '.bin' ,nx,ny,nz,15)
+    data_st  = read4Dfile(input_directory +'st'  + file_name + '.bin' ,nx,ny,nz,9 )
+    data_hh  = read4Dfile(input_directory +'hh'  + file_name + '.bin' ,nx,ny,nz,9 )
+    data_mu  = read3Dfile(input_directory +'mu'  + file_name + '.bin' ,nx,ny,nz)
+    data_eps = read3Dfile(input_directory +'eps' + file_name + '.bin' ,nx,ny,nz)
+    data_hrr = read3Dfile(input_directory +'hrr' + file_name + '.bin' ,nx,ny,nz)
+    data_k   = read3Dfile(input_directory +'k'   + file_name + '.bin' ,nx,ny,nz)
 
     # Extract DNS data
     U   = data_v[:,:,:,0:3]      # Velocity vector          [m/s]
@@ -102,7 +103,7 @@ def main():
         grid.point_data["hrr"]  = hrr.flatten(order="F")      # Heat release rate
 
         # Write the grid to a VTK file
-        grid.save('output/flow_data_'+file_name+'.vtk')
+        grid.save(output_directory+'flow_data_'+file_name+'.vtk')
 
         print('Flow data written to flow_data_'+file_name+'.vtk')
 
@@ -123,7 +124,7 @@ def main():
             grid.point_data[Sp[i]["Name"]] = Ysp[:,:,:,i].flatten(order="F")
 
         # Write the grid to a VTK file
-        grid.save('output/species_data_'+file_name+'.vtk')
+        grid.save(output_directory+'species_data_'+file_name+'.vtk')
 
         print('Species data written to species_data_'+file_name+'.vtk')
 
@@ -144,7 +145,7 @@ def main():
             grid.point_data['source_'+Sp[i]["Name"]] = Ssp[:,:,:,i].flatten(order="F")
 
         # Write the grid to a VTK file
-        grid.save('output/source_data_'+file_name+'.vtk')
+        grid.save(output_directory+'source_data_'+file_name+'.vtk')
 
         print('Source data written to source_data_'+file_name+'.vtk')
 
@@ -165,7 +166,7 @@ def main():
             grid.point_data['h_'+Sp[i]["Name"]] = hsp[:,:,:,i].flatten(order="F")
 
         # Write the grid to a VTK file
-        grid.save('output/enthalpy_data_'+file_name+'.vtk')
+        grid.save(output_directory+'enthalpy_data_'+file_name+'.vtk')
 
         print('Enthalpy data written to enthalpy_data_'+file_name+'.vtk')
 
