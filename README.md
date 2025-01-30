@@ -21,13 +21,10 @@ A python program that reads DISCO output files and writes them in VTK format to 
 5. Install dependencies
    ```bash
    pip3 install -r requirements.txt
-6. Create output directory to store the VTK files
-   ```bash
-   mkdir output
-
+   
 ## Usage
 
-1. Change the `directory` and `file_name` variables to your case folder and the desired time step.
+1. Change the `input_directory` to the location where your bindary DISCO files are located. Change `file_name` to which file / timestep you want to open. Change 'output_directory' to the location you want to store the VTK files.
 2. Set the write booleans, `write_flow`,`write_species`,`write_source` and `write_enthalpy`, to select which variables you want to write.
 3. Check if the grid parameters are correct.
 
